@@ -69,3 +69,26 @@ following path: `./img/out/it-#/`
 The bash script will create a `.csv` file that will contain the starting file's
 information, especially the file size and a description of the image.
 The output CSV can be found at the following path: `./img/out/it-#/out.csv`
+
+## Usage
+To run the test script on a directory of images using a compression algorithm
+and outputting to a directory, use the command:
+`./test_comp.sh # [start_types] "PATH to compression algorithm" [end_types]`
+Where:
+- `#` is the iteration number
+- `[start_types]` are the starting file types
+- `"PATH to compression algorithm"` is the path to the compression executable to
+- `[end_types]` are the ending file types
+- The test images are located at the following path: 
+`./img/in/it-#/[start_types]/`
+- The end images will be created to the following path: 
+`./img/out/it-#/[start_types]/[end_types]/`
+- The input file info for all input files must exist at `./img/in/it-#/info.csv`
+  be run
+
+## info.csv Format
+The info.csv file should contain the following fields, with one line per input
+file. A file is considered to be unique if it has a different type than another
+file of the same image, or is of a different size, so there should be a line for
+each file within the iteration number directory.
+`"title", "description", "type", "size"`
