@@ -22,15 +22,23 @@ if [[ !(${2:0:3} == "png" || ${2:0:3} == "tif" || ${2:0:3} == "bmp" || ${2:0:3} 
   exit 1
 fi
 
+# if there is not an executable file at the path passed in, error
+if [[ !(-x "$compalg") ]]; then
+  # print error
+  echo "Error: the compression algorithm you provided is not an executable file"
+  # exit with status of 1
+  exit 1
+fi
+
 # TODO -- List parsing of output files
 #         For now will just use static list of three output file types:
 #           - .j2k
 #           - .j2c
 #           - .jp2
 # if there is not a valid file type as output type, error
-if [[ ]]; then
-  # print usage error
-  echo "Error: Please enter a valid output file type. Valid file types are: j2k, j2c, jp2"
-  # exit with status of 1
-  exit 1
-fi
+#if [[ ]]; then
+#  # print usage error
+#  echo "Error: Please enter a valid output file type. Valid file types are: j2k, j2c, jp2"
+#  # exit with status of 1
+#  exit 1
+#fi
