@@ -31,18 +31,41 @@ OpenJPEG, version 2 -- pcomp -- https://github.com/planetlabs/openjpeg/
 ###### Start Types
 We will start with the following types, which will be converted into each end
 type.
-- .png
-- .tif
-- .bmp
-- .raw
+- `.png`
+- `.tif`
+- `.bmp`
+- `.raw`
 
 ###### End Types
 We will convert each starting type, using each algorithm, into the following
 types.
-- .j2k
-- .j2c
-- .jp2
+- `.j2k`
+- `.j2c`
+- `.jp2`
+
+## Input Test Files
+The input will start out as 30 test files containing a variety of geographic
+features, including:
+- Ocean
+- Coast and ocean
+- Fall foliage
+- Spring foliage
+- City
+All files will start out as `.raw` files and will then be converted to each of
+the other input file types. They will then be resized so that there are a
+variety of file sizes for each type, containing each geographic feature.
+Input test files can be found in the following path:
+`./img/in/it-#/[png/tif/bmp/raw]/`
+Each iteration will have file descriptions in the file `info.csv` contained in
+the path `./img/in/it-#/`
+
+## Compressed Image Files
+Each image file will be compressed to each of the end file types using both
+compression algorithms. This means that for every file in the input set, there
+will be six files in the output set. These files will be contained in the
+following path: `./img/out/it-#/`
 
 ## Test Out CSV
-The bash script will create a .csv file that will contain the starting file's
+The bash script will create a `.csv` file that will contain the starting file's
 information, especially the file size and a description of the image.
+The output CSV can be found at the following path: `./img/out/it-#/out.csv`
