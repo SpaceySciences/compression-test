@@ -56,3 +56,11 @@ for filename in ./img/in/it-$itnum/$stype/*; do
     exit 1
   fi
 done
+
+# if there is not an info.csv file, error
+if [[ !(-r "./img/in/it-$itnum/$stype/info.csv") ]]; then
+  # print error
+  echo "Error: an info.csv file has not been provided"
+  # exit with error of 1
+  exit 1
+fi
