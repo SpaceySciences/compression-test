@@ -64,3 +64,39 @@ if [[ !(-r "./img/in/it-$itnum/$stype/info.csv") ]]; then
   # exit with error of 1
   exit 1
 fi
+
+# make dirs for outputs
+mkdir ./img/out/it-$itnum
+mkdir ./img/out/it-$itnum/$stype
+
+# csv set up
+echo "\"in_title\" \"in_file_size\" \"out_title\" \"out_file_size\" \"description\"" > ./img/out/it-$itnum/$stype/info.csv
+
+# run the compression algorithm on the images
+num=0
+for filename in ./img/in/it-$itnum/$stype/*.$stype; do
+  in_filesize=$(wc -c < "$filename")
+
+  $compalg -i $filename -o ./img/out/it-$itnum/$stype/$num\.j2k
+  out_filesize=$(wc -c < "./img/out/it-$itnum/$stype/$num.j2k")
+  echo "$filename $in_filesize ./img/out/it-$itnum/$stype/$num.j2k $out_filesize" >> ./img/out/it-$itnum/$stype/info.csv
+
+  $compalg -i $filename -o ./img/out/it-$itnum/$stype/$num\.j2c
+  out_filesize=$(wc -c < "./img/out/it-$itnum/$stype/$num.j2c")
+  echo "$filename $in_filesize ./img/out/it-$itnum/$stype/$num.j2c $out_filesize" >> ./img/out/it-$itnum/$stype/info.csv
+
+  $compalg -i $filename -o ./img/out/it-$itnum/$stype/$num\.jp2
+  out_filesize=$(wc -c < "./img/out/it-$itnum/$stype/$num.jp2")
+  echo "$filename $in_filesize ./img/out/it-$itnum/$stype/$num.jp2 $out_filesize" >> ./img/out/it-$itnum/$stype/info.csv
+
+  num=`expr $num + 1`
+done
+
+
+
+# get the filename and file size for each file in the specified folder and
+# output to the csv
+for filename in ./img/in/it-$itnum/$stype/*.$stype; do
+  filesize=$(wc -c < "$filename")
+  echo "$filename $filesize" >> ./img/in/it-$itnum/$stype/info.csv
+done
